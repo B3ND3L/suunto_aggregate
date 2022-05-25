@@ -64,7 +64,7 @@ root.geometry('1280x720')
 
 def select_files():
     filetypes = (
-        ('text files', '*.xml'),
+        ('sml files', '*.sml'),
         ('All files', '*.*')
     )
 
@@ -72,7 +72,9 @@ def select_files():
         title='Open files',
         initialdir='/',
         filetypes=filetypes)
+    menu.entryconfig("Export to csv", state="normal")
     make_plot(filenames)
+    #TODO manage to overwrite data and plots
 
 
 def select_dest_dir():
@@ -82,7 +84,7 @@ def select_dest_dir():
     )
     print(dirname)
     export_file = os.path.join(dirname, 'export.csv')
-    with open(export_file, 'w') as f:
+    with open(export_file, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
         writer.writeheader()
         for data in export_datas:
@@ -91,6 +93,6 @@ def select_dest_dir():
 
 menu = tk.Menu(root)
 menu.add_command(label="Select Files", command=select_files)
-menu.add_command(label="Export to csv", command=select_dest_dir)
+menu.add_command(label="Export to csv", command=select_dest_dir, state="disabled")
 root.config(menu=menu)
 root.mainloop()
