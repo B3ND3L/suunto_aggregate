@@ -5,9 +5,10 @@ description = ""
 authors = ["Benjamin Delahais <delahais.b@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8, <3.11"
 xmltodict = "^0.13.0"
 matplotlib = "^3.5.2"
+pyinstaller = "^5.1"
 
 
 [tool.poetry.dev-dependencies]
