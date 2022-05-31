@@ -87,6 +87,10 @@ def make_plot(filenames, min_depth, auto_zero):
     plot.hlines(0, annotations['start'], annotations['end'],  linestyles='dashed', colors="blue")
     plot.text(annotations['middle'], -0.2, 'Surface', horizontalalignment='center', color='blue')
 
+    if '!canvas' in root.children:
+        root.children['!canvas'].destroy()
+        root.children['!navigationtoolbar2tk'].destroy()
+
     canvas = FigureCanvasTkAgg(fig, master=root)
     canvas.draw()
     toolbar = NavigationToolbar2Tk(canvas, root)
@@ -105,7 +109,6 @@ def is_entry_numeric(input):
 def launch_plot(filenames, min_depth, auto_zero=False):
     menu.entryconfig("Export to csv", state="normal")
     make_plot(filenames, min_depth, auto_zero)
-    # TODO manage to overwrite data and plots
 
 
 def create_popup(filenames):
@@ -155,8 +158,6 @@ root = tk.Tk()
 root.title('Dive aggregator')
 root.resizable(False, False)
 root.geometry('1280x720')
-
-canvas = None
 
 menu = tk.Menu(root)
 menu.add_command(label="Select Files", command=select_files)
