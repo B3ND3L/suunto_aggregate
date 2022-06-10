@@ -44,7 +44,7 @@ def parse_files(filenames, min_depth, auto_zero):
                 data.append({'time': 0, 'depth': 0})
 
             for sample in samples['Sample']:
-                if int(sample['Time']) == 0 and 'Depth' not in sample:
+                if 'Depth' not in sample:
                     pass
                 else:
                     current_time = int(sample['Time'])
